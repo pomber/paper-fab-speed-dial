@@ -55,7 +55,8 @@ A floating action button flinging out related actions
         active: Boolean,
         animationConfig: {
           value: function() {
-            var items = Polymer.dom(this.root).querySelectorAll('.dropdown-content>*');
+            var menu = this._getDropdownContent();
+            var items = menu.children;
             var array = Array.prototype.slice.call(items);
             var reversed = Array.prototype.slice.call(items).reverse();
             return {

@@ -1,6 +1,7 @@
 {
   "name": "paper-fab-speed-dial",
   "description": "A floating action button flinging out related actions",
+  "version": "0.5.0",
   "main": "paper-fab-speed-dial.html",
   "authors": [
     "pomber"

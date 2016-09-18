@@ -1,0 +1,27 @@
+{
+  "name": "paper-fab-speed-dial",
+  "description": "A floating action button flinging out related actions",
+  "main": "paper-fab-speed-dial.html",
+  "authors": [
+    "pomber"
+  ],
+  "keywords": [
+    "web-components",
+    "paper",
+    "menu",
+    "fab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pomber/paper-fab-speed-dial.git"
+  },
+  "homepage": "https://github.com/pomber/paper-fab-speed-dial",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+  }
+}

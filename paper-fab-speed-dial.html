@@ -1,6 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../paper-fab/paper-fab.html">
-<link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../neon-animation/animations/scale-up-animation.html">
@@ -24,21 +22,18 @@ A floating action button flinging out related actions
         right: 10px;
       }
 
-      .dropdown-content {      
+      .container ::content > .dropdown-content {
         @apply(--layout-vertical-reverse);
       }
 
-      .dropdown-content paper-fab {
+      .container ::content > .dropdown-content paper-fab {
         margin: 0px 8px 10px 8px;
       }
+
     </style>
-    <div class="container">        
-      <paper-fab icon="add" class="dropdown-trigger main-fab"></paper-fab>
-      <div class="dropdown-content" id="menu" hidden>
-        <paper-fab mini icon="star-border"></paper-fab>
-        <paper-fab mini icon="star-half"></paper-fab>
-        <paper-fab mini icon="star"></paper-fab>
-      </div>
+    <div class="container">  
+      <content>
+      </content>
     </div>
   </template>
 
@@ -52,8 +47,8 @@ A floating action button flinging out related actions
       ],
 
       ready: function() {
-        var fab = this.$$(".container>paper-fab");
-        this.listen(fab, 'tap', 'toggle');
+        var button = this._getTriggerElement();
+        this.listen(button, 'tap', 'toggle');
       },
 
       properties: {
@@ -79,8 +74,9 @@ A floating action button flinging out related actions
         }
       },
 
-      toggle: function () {      
-        this.$.menu.hidden = false;
+      toggle: function () {    
+        var menu = this._getDropdownContent();
+        menu.hidden = false;
         this.active = !this.active; 
         var animation = this.active ? 'entry' : 'exit';  
         this.playAnimation(animation);       
@@ -91,7 +87,16 @@ A floating action button flinging out related actions
       },
 
       _onNeonAnimationFinish: function() {
-        this.$.menu.hidden = !this.active;
+        var menu = this._getDropdownContent();
+        menu.hidden = !this.active;
+      },
+
+      _getTriggerElement: function() {
+        return this.queryEffectiveChildren(':first-child');
+      },
+
+      _getDropdownContent: function() {
+        return this.queryEffectiveChildren('.dropdown-content');
       }
 
     });

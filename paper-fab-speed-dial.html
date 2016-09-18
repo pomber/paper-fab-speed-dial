@@ -35,9 +35,9 @@ A floating action button flinging out related actions
     <div class="container">        
       <paper-fab icon="add" class="dropdown-trigger main-fab"></paper-fab>
       <div class="dropdown-content" id="menu" hidden>
-        <paper-fab mini icon="star-border" class="item"></paper-fab>
-        <paper-fab mini icon="star-half" class="item"></paper-fab>
-        <paper-fab mini icon="star" class="item"></paper-fab>
+        <paper-fab mini icon="star-border"></paper-fab>
+        <paper-fab mini icon="star-half"></paper-fab>
+        <paper-fab mini icon="star"></paper-fab>
       </div>
     </div>
   </template>
@@ -60,7 +60,7 @@ A floating action button flinging out related actions
         active: Boolean,
         animationConfig: {
           value: function() {
-            var items = Polymer.dom(this.root).querySelectorAll('.item');
+            var items = Polymer.dom(this.root).querySelectorAll('.dropdown-content>*');
             var array = Array.prototype.slice.call(items);
             var reversed = Array.prototype.slice.call(items).reverse();
             return {

@@ -48,7 +48,9 @@ A floating action button flinging out related actions
 
       ready: function() {
         var button = this._getTriggerElement();
+        var menu = this._getDropdownContent();
         this.listen(button, 'tap', 'toggle');
+        menu.hidden = !this.active;
       },
 
       properties: {

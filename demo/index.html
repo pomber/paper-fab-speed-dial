@@ -12,6 +12,10 @@
     <link rel="import" href="../paper-fab-speed-dial.html">
 
     <style is="custom-style" include="demo-pages-shared-styles">
+      .screen {
+        min-height: 400px;
+        position: relative;
+      }
     </style>
   </head>
   <body>
@@ -20,7 +24,9 @@
       <h3>Basic paper-fab-speed-dial Demo</h3>
       <demo-snippet>
         <template>
-          <paper-fab-speed-dial></paper-fab-speed-dial>
+          <div class="screen">
+            <paper-fab-speed-dial></paper-fab-speed-dial>
+          </div>
         </template>
       </demo-snippet>
     </div>

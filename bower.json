@@ -16,6 +16,10 @@
     "type": "git",
     "url": "git://github.com/pomber/paper-fab-speed-dial.git"
   },
+  "ignore": [
+    "docs/",
+    "docs/*"
+  ],
   "homepage": "https://github.com/pomber/paper-fab-speed-dial",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",

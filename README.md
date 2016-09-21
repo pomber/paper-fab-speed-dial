@@ -2,6 +2,8 @@
 
 A floating action button flinging out related actions
 
+![Demo](https://raw.githubusercontent.com/pomber/paper-fab-speed-dial/master/docs/images/paper-fab-speed-dial.gif)
+
 ## Usage
 
 Install:

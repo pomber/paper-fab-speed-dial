@@ -1,0 +1,45 @@
+{
+  "name": "paper-fab-speed-dial",
+  "description": "A floating action button flinging out related actions",
+  "main": "paper-fab-speed-dial.html",
+  "authors": [
+    "pomber"
+  ],
+  "keywords": [
+    "web-components",
+    "paper",
+    "menu",
+    "fab"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/pomber/paper-fab-speed-dial.git"
+  },
+  "ignore": [
+    "docs/",
+    "docs/*"
+  ],
+  "homepage": "https://github.com/pomber/paper-fab-speed-dial",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.4.0",
+    "neon-animation": "PolymerElements/neon-animation#^1.2.4",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.3.1"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^1.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+    "paper-fab": "PolymerElements/paper-fab#^1.2.0",
+    "iron-icon": "PolymerElements/iron-icon#^1.0.10"
+  },
+  "_release": "3a9b198a50",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "3a9b198a503765196472cb8d247e812fe350a643"
+  },
+  "_source": "git://github.com/pomber/paper-fab-speed-dial.git",
+  "_target": "master",
+  "_originalSource": "pomber/paper-fab-speed-dial",
+  "_direct": true
+}

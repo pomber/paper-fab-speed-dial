@@ -20,7 +20,7 @@
     "docs/",
     "docs/*"
   ],
-  "homepage": "https://github.com/pomber/paper-fab-speed-dial",
+  "homepage": "https://pomber.github.io/paper-fab-speed-dial/",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
     "neon-animation": "PolymerElements/neon-animation#^1.2.4",

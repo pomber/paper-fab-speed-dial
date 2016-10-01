@@ -1,8 +1,11 @@
 # \<paper-fab-speed-dial\>
 
-A floating action button flinging out related actions
+A floating action button flinging out related actions.
 
+## Demo
 ![Demo](https://raw.githubusercontent.com/pomber/paper-fab-speed-dial/master/docs/images/paper-fab-speed-dial.gif)
+
+Live demo in [component page](https://pomber.github.io/paper-fab-speed-dial/)
 
 ## Usage
 

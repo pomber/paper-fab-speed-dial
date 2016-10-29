@@ -20,6 +20,7 @@
     "docs/",
     "docs/*"
   ],
+  "license": "MIT",
   "homepage": "https://pomber.github.io/paper-fab-speed-dial/",
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",

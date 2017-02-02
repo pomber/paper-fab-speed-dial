@@ -33,3 +33,8 @@ Use:
     </div>
 </paper-fab-speed-dial>
 ```
+
+Style:
+
+
+`--paper-fab-speed-dial` | Mixin applied to the element | `{}`

@@ -15,34 +15,29 @@ A floating action button flinging out related actions
 <dom-module id="paper-fab-speed-dial">
   <template>
 	<style include="iron-flex iron-flex-alignment iron-flex-reverse">
-	  .container {
+	  :host {
 		@apply(--layout-vertical-reverse);
 		position: absolute;
 		bottom: 10px;
 		right: 10px;
+
+		@apply(--paper-fab-speed-dial);
 	  }
 
-	  .container {
-		@apply(--paper-fab-speed-dial);  !important;
-	  }
-
-	  .container ::content > .dropdown-content {
+	  :host ::content > .dropdown-content {
 		@apply(--layout-vertical-reverse);
 	  }
 
-	  .container ::content > .dropdown-content paper-fab {
+	  :host ::content > .dropdown-content paper-fab {
 		margin: 0px 8px 10px 8px;
 	  }
 
-	  .container ::content > .dropdown-content[hidden] {
-		display: none !important;
+	  :host ::content > .dropdown-content[hidden] {
+		display: none;
 	  }
-
 	</style>
-	<div class="container">
-	  <content>
-	  </content>
-	</div>
+
+	<content></content>
   </template>
 
   <script>
@@ -62,7 +57,13 @@ A floating action button flinging out related actions
 	  },
 
 	  properties: {
-		active: Boolean,
+		active: {
+		  type: Boolean,
+		  value: false,
+		  notify: true,
+		  reflectToAttribute: true
+		},
+
 		animationConfig: {
 		  value: function(){
 			var menu = this._getDropdownContent();

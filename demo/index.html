@@ -1,44 +1,73 @@
 <!doctype html>
 <html>
-  <head>
-    <title>paper-fab-speed-dial demo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../paper-fab/paper-fab.html">
-    <link rel="import" href="../../iron-icons/iron-icons.html">
+<head>
+  <title>paper-fab-speed-dial demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <link rel="import" href="../paper-fab-speed-dial.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../../paper-fab/paper-fab.html">
+  <link rel="import" href="../../iron-icons/iron-icons.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-      .screen {
-        min-height: 400px;
-        position: relative;
-      }
-    </style>
-  </head>
-  <body>
+  <link rel="import" href="../paper-fab-speed-dial.html">
 
-    <div class="vertical-section-container centered">
-      <h3>Basic paper-fab-speed-dial demo</h3>
-      <demo-snippet>
-        <template>
-          <div class="screen">
-            <paper-fab-speed-dial>      
-              <paper-fab icon="add"></paper-fab>
-              <div class="dropdown-content">
-                <paper-fab mini icon="rowing"></paper-fab>
-                <paper-fab mini icon="weekend"></paper-fab>
-                <paper-fab mini icon="pets"></paper-fab>
-              </div>
-            </paper-fab-speed-dial>
-          </div>
-        </template>
-      </demo-snippet>
-    </div>
+  <style is="custom-style" include="demo-pages-shared-styles">
+    .screen {
+      min-height: 400px;
+      position: relative;
+    }
+  </style>
+</head>
 
-  </body>
+<body>
+
+  <div class="vertical-section-container centered">
+    <h3>Basic paper-fab-speed-dial demo</h3>
+    <demo-snippet>
+      <template>
+        <div class="screen">
+          <paper-fab-speed-dial>
+            <paper-fab icon="add"></paper-fab>
+            <div class="dropdown-content">
+              <paper-fab mini icon="rowing"></paper-fab>
+              <paper-fab mini icon="weekend"></paper-fab>
+              <paper-fab mini icon="pets"></paper-fab>
+            </div>
+          </paper-fab-speed-dial>
+        </div>
+      </template>
+    </demo-snippet>
+  </div>
+
+  <div class="vertical-section-container centered">
+    <h3>Custom style</h3>
+    <demo-snippet>
+      <template>
+        <style is="custom-style">
+          paper-fab-speed-dial.two {
+            --paper-fab-speed-dial: {
+              bottom: 10px;
+              left: 10px;
+            };
+          }
+        </style>
+        <div class="screen">
+          <paper-fab-speed-dial class="two">
+            <paper-fab icon="add"></paper-fab>
+            <div class="dropdown-content">
+              <paper-fab mini icon="rowing"></paper-fab>
+              <paper-fab mini icon="weekend"></paper-fab>
+              <paper-fab mini icon="pets"></paper-fab>
+            </div>
+          </paper-fab-speed-dial>
+        </div>
+      </template>
+    </demo-snippet>
+  </div>
+
+</body>
+
 </html>

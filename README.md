@@ -34,7 +34,10 @@ Use:
 </paper-fab-speed-dial>
 ```
 
-Style:
+## Styling
 
+The following custom properties and mixins are available for styling:
 
-`--paper-fab-speed-dial` | Mixin applied to the element | `{}`
+| Custom property | Description | Default |
+| --- | --- | --- |
+| `--paper-fab-speed-dial` | Mixin applied to the element | `{}` |

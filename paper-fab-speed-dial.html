@@ -1,5 +1,4 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../neon-animation/animations/scale-up-animation.html">
 <link rel="import" href="../neon-animation/animations/scale-down-animation.html">
@@ -14,28 +13,26 @@ A floating action button flinging out related actions
 
 <dom-module id="paper-fab-speed-dial">
   <template>
-    <style include="iron-flex iron-flex-alignment iron-flex-reverse">
+    <style>
     :host {
-      @apply --layout-vertical-reverse;
-      position: absolute;
+      display: flex;
+      flex-flow: column-reverse;
+      position: var(--paper-fab-speed-dial-position, absolute);
       bottom: 10px;
       right: 10px;
       @apply --paper-fab-speed-dial;
     }
 
-    [hidden] {
-      display: none !important;
+    ::slotted(div) {
+      display: grid;
+      grid-row-gap: 10px;
     }
 
-    #content,
-    #content ::slotted(div) {
-      @apply --layout-vertical-reverse;
-    }
-
-    ::slotted([mini]) {
+    #content {
       margin: 0px 8px 10px 8px;
     }
 
+    [hidden],
     ::slotted([hidden]) {
       display: none !important;
     }

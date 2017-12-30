@@ -9,107 +9,115 @@
 `paper-fab-speed-dial`
 A floating action button flinging out related actions
 
-@demo demo/index.html 
+@demo demo/index.html
 -->
 
 <dom-module id="paper-fab-speed-dial">
-	<template>
-		<style include="iron-flex iron-flex-alignment iron-flex-reverse">
-			:host {
-				@apply(--layout-vertical-reverse);
-				position: absolute;
-				bottom: 10px;
-				right: 10px;
-				@apply(--paper-fab-speed-dial);
-			}
-			
-			:host::content > .dropdown-content {
-				@apply(--layout-vertical-reverse);
-			}
-			
-			:host::content > .dropdown-content paper-fab {
-				margin: 0px 8px 10px 8px;
-			}
-			
-			:host::content > .dropdown-content[hidden] {
-				display: none;
-			}
-		</style>
+  <template>
+    <style include="iron-flex iron-flex-alignment iron-flex-reverse">
+    :host {
+      @apply --layout-vertical-reverse;
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      @apply --paper-fab-speed-dial;
+    }
 
-		<content></content>
-	</template>
+    [hidden] {
+      display: none !important;
+    }
 
-	<script>
-		Polymer({
+    #content,
+    #content ::slotted(div) {
+      @apply --layout-vertical-reverse;
+    }
 
-			is: 'paper-fab-speed-dial',
+    ::slotted([mini]) {
+      margin: 0px 8px 10px 8px;
+    }
 
-			behaviors: [
-				Polymer.NeonAnimationRunnerBehavior
-			],
+    ::slotted([hidden]) {
+      display: none !important;
+    }
 
-			ready: function () {
-				var button = this._getTriggerElement();
-				var menu = this._getDropdownContent();
-				this.listen(button, 'tap', 'toggle');
-				menu.hidden = !this.active;
-			},
+    </style>
 
-			properties: {
-				active: {
-					type: Boolean,
-					value: false,
-					notify: true,
-					reflectToAttribute: true
-				},
+    <slot></slot>
+    <div id="content">
+      <slot name="dropdown-content"></slot>
+    </div>
 
-				animationConfig: {
-					value: function () {
-						var menu = this._getDropdownContent();
-						var items = menu.children;
-						var array = Array.prototype.slice.call(items);
-						var reversed = Array.prototype.slice.call(items).reverse();
-						return {
-							'entry': {
-								name: 'cascaded-animation',
-								animation: 'scale-up-animation',
-								nodes: array
-							},
-							'exit': {
-								name: 'cascaded-animation',
-								animation: 'scale-down-animation',
-								nodes: reversed
-							}
-						}
-					}
-				}
-			},
+  </template>
 
-			toggle: function () {
-				var menu = this._getDropdownContent();
-				menu.hidden = false;
-				this.active = !this.active;
-				var animation = this.active ? 'entry' : 'exit';
-				this.playAnimation(animation);
-			},
+  <script>
+    Polymer({
 
-			listeners: {
-				'neon-animation-finish': '_onNeonAnimationFinish'
-			},
+      is: 'paper-fab-speed-dial',
 
-			_onNeonAnimationFinish: function () {
-				var menu = this._getDropdownContent();
-				menu.hidden = !this.active;
-			},
+      behaviors: [
+        Polymer.NeonAnimationRunnerBehavior,
+      ],
 
-			_getTriggerElement: function () {
-				return this.queryEffectiveChildren(':first-child');
-			},
+      ready: function() {
+        var button = this._getTriggerElement();
+        var menu = this._getDropdownContent();
+        this.listen(button, 'tap', 'toggle');
+        menu.hidden = !this.active;
+        this.addEventListener('neon-animation-finish', (event) => this._onNeonAnimationFinish(event));
+      },
 
-			_getDropdownContent: function () {
-				return this.queryEffectiveChildren('.dropdown-content');
-			}
+      properties: {
+        active: {
+          type: Boolean,
+          value: false,
+          notify: true,
+          reflectToAttribute: true
+        },
 
-		});
-	</script>
+        animationConfig: {
+          value: function() {
+            var menu = this._getDropdownContent();
+            var items = menu.children;
+            var array = Array.prototype.slice.call(items);
+            var reversed = Array.prototype.slice.call(items).reverse();
+            return {
+              'entry': {
+                name: 'cascaded-animation',
+                animation: 'scale-up-animation',
+                nodes: array
+              },
+              'exit': {
+                name: 'cascaded-animation',
+                animation: 'scale-down-animation',
+                nodes: reversed
+              }
+            }
+          }
+        }
+      },
+
+      toggle: function() {
+        var menu = this._getDropdownContent();
+        menu.hidden = false;
+        this.active = !this.active;
+        var animation = this.active ? 'entry' : 'exit';
+        this.playAnimation(animation);
+      },
+
+
+      _onNeonAnimationFinish: function() {
+        var menu = this._getDropdownContent();
+        menu.hidden = !this.active;
+      },
+
+      _getTriggerElement: function() {
+        return this.queryEffectiveChildren('slot:first-of-type');
+      },
+
+      _getDropdownContent: function() {
+        return this.queryEffectiveChildren('#content slot');
+      }
+
+    });
+  </script>
 </dom-module>

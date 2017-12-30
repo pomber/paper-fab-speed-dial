@@ -21,7 +21,7 @@ A floating action button flinging out related actions
       flex-flow: column-reverse;
       position: var(--paper-fab-speed-dial-position, absolute);
       bottom: var(--paper-fab-speed-dial-bottom, 10px);
-      right: var(--paper-fab-speed-dial-bottom, 10px);
+      right: var(--paper-fab-speed-dial-right, 10px);
       @apply --paper-fab-speed-dial;
     }
 
@@ -83,18 +83,18 @@ A floating action button flinging out related actions
               button.addEventListener('tap', this.toggle.bind(this));
         const menu = this._getDropdownContent()[0];
               menu.hidden = !this.active;
-        const array = this._getDropdownContent();
+        const array = Array.from(menu.children);
         const reversed = [...array].reverse();
         this.animationConfig = {
           'entry': {
             name: 'cascaded-animation',
             animation: 'scale-up-animation',
-            nodes: array,
+            nodes: reversed,
           },
           'exit': {
             name: 'cascaded-animation',
             animation: 'scale-down-animation',
-            nodes: reversed,
+            nodes: array,
           },
         };
       }

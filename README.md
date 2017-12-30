@@ -41,3 +41,6 @@ The following custom properties and mixins are available for styling:
 | Custom property | Description | Default |
 | --- | --- | --- |
 | `--paper-fab-speed-dial` | Mixin applied to the element | `{}` |
+| `--paper-fab-speed-dial-position` | Position of the element | `absolute` |
+| `--paper-fab-speed-dial-bottom` | bottom value of the element. | 10px |
+| `--paper-fab-speed-dial-right` | right value of the element. | 10px | 

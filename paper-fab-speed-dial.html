@@ -44,80 +44,91 @@ A floating action button flinging out related actions
 
     <slot></slot>
     <div id="content">
-      <slot name="dropdown-content"></slot>
+      <slot id="contentSlot" name="dropdown-content"></slot>
     </div>
 
   </template>
 
-  <script>
-    Polymer({
+  <script> {
+    const isElement = (node) => node.nodeType === 1;
 
-      is: 'paper-fab-speed-dial',
+    class PaperFabSpeedDial extends Polymer.mixinBehaviors([
+      Polymer.NeonAnimationRunnerBehavior,
+    ], Polymer.Element) {
+      static get is() {return 'paper-fab-speed-dial';}
 
-      behaviors: [
-        Polymer.NeonAnimationRunnerBehavior,
-      ],
+      static get properties() {
+        return {
 
-      ready: function() {
+          active: {
+            type: Boolean,
+            value: false,
+            notify: true,
+            reflectToAttribute: true,
+          },
+
+          animationConfig: {
+            type: Object,
+            value: null,
+          },
+
+        };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
         var button = this._getTriggerElement();
-        var menu = this._getDropdownContent();
-        this.listen(button, 'tap', 'toggle');
+        var menu = this._getDropdownContent()[0];
         menu.hidden = !this.active;
-        this.addEventListener('neon-animation-finish', (event) => this._onNeonAnimationFinish(event));
-      },
+        button.addEventListener('tap', this.toggle.bind(this));
+        this.addEventListener('neon-animation-finish', this._onNeonAnimationFinish.bind(this));
+        var items = this._getDropdownContent();
+        var array = [...items];
+        var reversed = [...items].reverse();
+        this.animationConfig = {
+          'entry': {
+            name: 'cascaded-animation',
+            animation: 'scale-up-animation',
+            nodes: array,
+          },
+          'exit': {
+            name: 'cascaded-animation',
+            animation: 'scale-down-animation',
+            nodes: reversed,
+          },
+        };
+      }
 
-      properties: {
-        active: {
-          type: Boolean,
-          value: false,
-          notify: true,
-          reflectToAttribute: true
-        },
-
-        animationConfig: {
-          value: function() {
-            var menu = this._getDropdownContent();
-            var items = menu.children;
-            var array = Array.prototype.slice.call(items);
-            var reversed = Array.prototype.slice.call(items).reverse();
-            return {
-              'entry': {
-                name: 'cascaded-animation',
-                animation: 'scale-up-animation',
-                nodes: array
-              },
-              'exit': {
-                name: 'cascaded-animation',
-                animation: 'scale-down-animation',
-                nodes: reversed
-              }
-            }
-          }
-        }
-      },
-
-      toggle: function() {
-        var menu = this._getDropdownContent();
+      toggle() {
+        var menu = this._getDropdownContent()[0];
         menu.hidden = false;
         this.active = !this.active;
         var animation = this.active ? 'entry' : 'exit';
         this.playAnimation(animation);
-      },
-
-
-      _onNeonAnimationFinish: function() {
-        var menu = this._getDropdownContent();
-        menu.hidden = !this.active;
-      },
-
-      _getTriggerElement: function() {
-        return this.queryEffectiveChildren('slot:first-of-type');
-      },
-
-      _getDropdownContent: function() {
-        return this.queryEffectiveChildren('#content slot');
       }
 
-    });
+      _onNeonAnimationFinish() {
+        var menu = this._getDropdownContent()[0];
+        menu.hidden = !this.active;
+      }
+
+      _getTriggerElement() {
+        const nodes = this.shadowRoot.querySelector('slot:first-of-type')
+          .assignedNodes()
+          .filter(isElement);
+        return nodes[0];
+      }
+
+      _getDropdownContent() {
+        const nodes = this.shadowRoot.querySelector('slot[name="dropdown-content"]')
+          .assignedNodes()
+          .filter(isElement);
+        return nodes;
+      }
+    }
+
+    customElements.define(PaperFabSpeedDial.is, PaperFabSpeedDial);
+  }
+
   </script>
 </dom-module>

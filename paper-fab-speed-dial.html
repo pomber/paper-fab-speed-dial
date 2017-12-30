@@ -65,6 +65,7 @@ A floating action button flinging out related actions
             value: false,
             notify: true,
             reflectToAttribute: true,
+            observer: 'activeChanged',
           },
 
           animationConfig: {
@@ -100,10 +101,13 @@ A floating action button flinging out related actions
       }
 
       toggle() {
-        const menu = this._getDropdownContent()[0];
-              menu.hidden = false;
         this.active = !this.active;
-        const animation = this.active ? 'entry' : 'exit';
+      }
+
+      activeChanged(active) {
+        const menu = this._getDropdownContent()[0];
+        if (active) menu.hidden = false;
+        const animation = active ? 'entry' : 'exit';
         this.playAnimation(animation);
       }
 

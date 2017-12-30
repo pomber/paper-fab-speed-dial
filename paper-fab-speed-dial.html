@@ -74,14 +74,14 @@ A floating action button flinging out related actions
 
       connectedCallback() {
         super.connectedCallback();
-        var button = this._getTriggerElement();
-        var menu = this._getDropdownContent()[0];
-        menu.hidden = !this.active;
-        button.addEventListener('tap', this.toggle.bind(this));
+        // eslint-disable-next-line max-len
         this.addEventListener('neon-animation-finish', this._onNeonAnimationFinish.bind(this));
-        var items = this._getDropdownContent();
-        var array = [...items];
-        var reversed = [...items].reverse();
+        const button = this._getTriggerElement();
+              button.addEventListener('tap', this.toggle.bind(this));
+        const menu = this._getDropdownContent()[0];
+              menu.hidden = !this.active;
+        const array = this._getDropdownContent();
+        const reversed = [...array].reverse();
         this.animationConfig = {
           'entry': {
             name: 'cascaded-animation',
@@ -97,16 +97,16 @@ A floating action button flinging out related actions
       }
 
       toggle() {
-        var menu = this._getDropdownContent()[0];
-        menu.hidden = false;
+        const menu = this._getDropdownContent()[0];
+              menu.hidden = false;
         this.active = !this.active;
-        var animation = this.active ? 'entry' : 'exit';
+        const animation = this.active ? 'entry' : 'exit';
         this.playAnimation(animation);
       }
 
       _onNeonAnimationFinish() {
-        var menu = this._getDropdownContent()[0];
-        menu.hidden = !this.active;
+        const menu = this._getDropdownContent()[0];
+              menu.hidden = !this.active;
       }
 
       _getTriggerElement() {

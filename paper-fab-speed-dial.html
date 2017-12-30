@@ -14,12 +14,13 @@ A floating action button flinging out related actions
 <dom-module id="paper-fab-speed-dial">
   <template>
     <style>
+
     :host {
       display: flex;
       flex-flow: column-reverse;
       position: var(--paper-fab-speed-dial-position, absolute);
-      bottom: 10px;
-      right: 10px;
+      bottom: var(--paper-fab-speed-dial-bottom, 10px);
+      right: var(--paper-fab-speed-dial-bottom, 10px);
       @apply --paper-fab-speed-dial;
     }
 
@@ -40,6 +41,7 @@ A floating action button flinging out related actions
     </style>
 
     <slot></slot>
+
     <div id="content">
       <slot id="contentSlot" name="dropdown-content"></slot>
     </div>

@@ -1,4 +1,5 @@
-<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/utils/flattened-nodes-observer.html">
 <link rel="import" href="../neon-animation/web-animations.html">
 <link rel="import" href="../neon-animation/neon-animation-runner-behavior.html">
 <link rel="import" href="../neon-animation/animations/scale-up-animation.html">
@@ -41,7 +42,7 @@ A floating action button flinging out related actions
 
     </style>
 
-    <slot></slot>
+    <slot id="triggerSlot"></slot>
 
     <div id="content">
       <slot id="contentSlot" name="dropdown-content"></slot>
@@ -73,18 +74,50 @@ A floating action button flinging out related actions
             value: null,
           },
 
+          dropdownContent: {
+            type: Object,
+            readOnly: true,
+            observer: 'dropdownContentChanged',
+          },
+
+          triggerElement: {
+            type: Object,
+            readOnly: true,
+          },
+
         };
       }
 
       connectedCallback() {
         super.connectedCallback();
         // eslint-disable-next-line max-len
-        this.addEventListener('neon-animation-finish', this._onNeonAnimationFinish.bind(this));
-        const button = this._getTriggerElement();
-              button.addEventListener('tap', this.toggle.bind(this));
-        const menu = this._getDropdownContent()[0];
-              menu.hidden = !this.active;
-        const array = Array.from(menu.children);
+        this.addEventListener('neon-animation-finish', this.onNeonAnimationFinish.bind(this));
+
+        this.triggerNodeObserver =
+          new Polymer.FlattenedNodesObserver(this.$.triggerSlot, (info) => {
+            this._setTriggerElement(info.addedNodes.filter(isElement).pop());
+            this.triggerElement.addEventListener('tap', (e) => this.toggle(e));
+          });
+
+        this.contentSlotObserver =
+          new Polymer.FlattenedNodesObserver(this.$.contentSlot, (info) => {
+            this._setDropdownContent(info.addedNodes.filter(isElement).pop());
+          });
+      }
+
+      toggle() {
+        this.active = !this.active;
+      }
+
+      activeChanged(active) {
+        if (active) this.dropdownContent.hidden = false;
+        const animation = active ? 'entry' : 'exit';
+        this.playAnimation(animation);
+      }
+
+      dropdownContentChanged(dropdownContent) {
+        dropdownContent.hidden = true;
+        const array = Array.from(dropdownContent.children);
         const reversed = [...array].reverse();
         this.animationConfig = {
           'entry': {
@@ -100,34 +133,8 @@ A floating action button flinging out related actions
         };
       }
 
-      toggle() {
-        this.active = !this.active;
-      }
-
-      activeChanged(active) {
-        const menu = this._getDropdownContent()[0];
-        if (active) menu.hidden = false;
-        const animation = active ? 'entry' : 'exit';
-        this.playAnimation(animation);
-      }
-
-      _onNeonAnimationFinish() {
-        const menu = this._getDropdownContent()[0];
-              menu.hidden = !this.active;
-      }
-
-      _getTriggerElement() {
-        const nodes = this.shadowRoot.querySelector('slot:first-of-type')
-          .assignedNodes()
-          .filter(isElement);
-        return nodes[0];
-      }
-
-      _getDropdownContent() {
-        const nodes = this.shadowRoot.querySelector('slot[name="dropdown-content"]')
-          .assignedNodes()
-          .filter(isElement);
-        return nodes;
+      onNeonAnimationFinish() {
+        this.dropdownContent.hidden = !this.active;
       }
     }
 

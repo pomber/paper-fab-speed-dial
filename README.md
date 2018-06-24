@@ -7,7 +7,7 @@ A floating action button flinging out related actions.
 
 Live demo in [component page](https://pomber.github.io/paper-fab-speed-dial/)
 
-## Usagess
+## Usages
 
 Install:
 
